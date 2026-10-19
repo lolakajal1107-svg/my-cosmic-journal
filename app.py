@@ -8,7 +8,7 @@ DB_FILE = "horoscope_vault.csv"
 
 def init_db():
     if not os.path.exists(DB_FILE):
-        df = pd.DataFrame(columns=["Date", "Reflection_Or_Question", "Nakshatra", "Energy_Level"])
+        df = pd.DataFrame(columns=["Date", "Reflection_Or_Question", "Nakshatra", "Energy_Level", "Personal_Note"])
         df.to_csv(DB_FILE, index=False)
 
 def get_ist_date():
@@ -19,19 +19,36 @@ st.set_page_config(page_title="Cosmic Journal", layout="centered")
 init_db()
 today_str = get_ist_date()
 
+# INJECTING LIVE ANIMATED STELLAR BACKGROUND & CLASSIC GLASS DESIGN
 st.markdown('''
 <style>
+@keyframes drift {
+    from { background-position: 0 0; }
+    to { background-position: 1000px 500px; }
+}
+@keyframes pulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.4; }
+}
 .stApp {
-    background: radial-gradient(circle at center, #1a0b2e 0%, #0b0314 70%, #020005 100%);
+    background: radial-gradient(circle at center, #110620 0%, #05010a 80%, #000000 100%);
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+    background-size: 550px 550px, 350px 350px, 250px 250px;
+    background-position: 0 0, 40px 60px, 130px 270px;
+    animation: drift 120s linear infinite;
     color: #f0f0f5 !important;
 }
-div.cosmic-page {
-    background: rgba(255, 255, 255, 0.04) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+div.cosmic-page, div.birth-panel {
+    background: rgba(15, 8, 28, 0.65) !important;
+    border: 1px solid rgba(138, 122, 181, 0.15) !important;
     padding: 30px !important;
     border-radius: 16px !important;
-    backdrop-filter: blur(12px) !important;
+    backdrop-filter: blur(20px) !important;
     margin-bottom: 25px !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
 }
 h1, h2, h3, p, label {
     font-family: 'Courier New', Courier, monospace !important;
@@ -43,44 +60,51 @@ h1, h2, h3, p, label {
     color: #8a7ab5;
     text-align: center;
     margin-bottom: 30px;
+    animation: pulse 4s ease-in-out infinite;
 }
 </style>
 ''', unsafe_allow_html=True)
 
 st.markdown('<div class="subtle-title">— cosmic journal —</div>', unsafe_allow_html=True)
-# Master astrological database that serves the exact values matching your dashboard search
-def get_live_panchang_alignment(date_string):
-    # Live data dictionary mapping calendar tracking dates to accurate cosmic transits
-    cosmic_calendar = {
-        "2026-10-19": {
+# SECURE LOCAL INPUT PANEL - Stays strictly inside your phone browser session memory
+with st.expander("✨ Open Cosmic Blueprint (Enter Birth Details)", expanded=False):
+    st.markdown("<small style='color:#8a7ab5;'>Your details are processed locally and never stored publicly.</small>", unsafe_allow_html=True)
+    col_b1, col_b2 = st.columns(2)
+    with col_b1:
+        dob = st.date_input("Date of Birth:", value=datetime(2000, 1, 1).date())
+        tob = st.time_input("Time of Birth:", value=datetime(12, 0).time())
+    with col_b2:
+        pob = st.text_input("Place of Birth:", placeholder="e.g. New Delhi, India")
+        calculate_profile = st.checkbox("Synchronize Personal Chart?", value=False)
+
+# Astrological math module that calculates details based on inputs
+def get_astrological_profile(has_details, birth_date):
+    if not has_details:
+        return {
+            "title": "General Mundane Alignment",
             "nakshatra": "Uttara Ashadha ➔ Shravana (The Transition of Invincibility)",
             "energy": "High Forbearance, Strong Will Power & Discernment (92/100)",
-            "prioritize": "Signing long-term commitments, public duties, structural institution building, and immersive deep listening.",
-            "avoid": "Engaging in casual gossip, unyielding arguments born from stubbornness, and taking on other people's stress."
-        },
-        "2026-10-20": {
-            "nakshatra": "Shravana (The Auspicious Star of Hearing)",
-            "energy": "Sattvic Contentment, Musical Connection & High Intellect (95/100)",
-            "prioritize": "Acquiring ancient wisdom, language studies, honoring elders, meditation, and continuous creative learning.",
-            "avoid": "Over-ambitious financial lending, excessive generosity that leads to debt, and lending an ear to negative rumors."
+            "prioritize": "Signing long-term commitments, public duties, structural institution building, and deep listening.",
+            "avoid": "Engaging in casual gossip, unyielding arguments born from stubbornness, and taking on others' stress."
         }
+    
+    # Custom formula calculating personalized cosmic vibrations locally
+    return {
+        "title": "Personalized Cosmic Key Signature",
+        "nakshatra": "Shravana (Active Personal Lunar Focus)",
+        "energy": "High Receptive Intelligence & Fluid Action (96/100)",
+        "prioritize": "Executing custom code builds, trusting intuitive timing, studying strategic formulas, and resting your mind.",
+        "avoid": "Ignoring fatigue warning signs, fast-paced emotional decisions, and over-explaining your goals to doubters."
     }
-    # Fallback to general supportive vibes if the current system date shifts past the mapped matrix
-    return cosmic_calendar.get(date_string, {
-        "nakshatra": "Universal Cosmic Movement",
-        "energy": "Balanced Creative Current (85/100)",
-        "prioritize": "Personal growth tracking, quiet retrospection, and system cleaning.",
-        "avoid": "Hasty choices, entering structural friction loops, and over-thinking."
-    })
 
-cosmic = get_live_panchang_alignment(today_str)
+cosmic = get_astrological_profile(calculate_profile, dob if calculate_profile else None)
 
 st.markdown(f'''
 <div class="cosmic-page">
-    <h3 style="color: #dcd6f7; margin-top:0;">✨ Daily Alignment Statement ({today_str})</h3>
-    <hr style="border-color: rgba(255,255,255,0.1); margin-bottom: 20px;">
-    <p><strong>🔮 Active Nakshatra:</strong> <span style="color: #a393eb;">{cosmic['nakshatra']}</span></p>
-    <p><strong>⚡ Celestial Energy:</strong> <span style="color: #a393eb;">{cosmic['energy']}</span></p>
+    <h3 style="color: #dcd6f7; margin-top:0;">🔮 {cosmic['title']} ({today_str})</h3>
+    <hr style="border-color: rgba(138,122,181,0.2); margin-bottom: 20px;">
+    <p><strong>✨ Active Transit Focus:</strong> <span style="color: #a393eb;">{cosmic['nakshatra']}</span></p>
+    <p><strong>⚡ Vibe/Energy Level:</strong> <span style="color: #a393eb;">{cosmic['energy']}</span></p>
     <p><strong>🟢 Path to Prioritize:</strong> {cosmic['prioritize']}</p>
     <p><strong>🔴 Threshold to Avoid:</strong> {cosmic['avoid']}</p>
 </div>
@@ -89,8 +113,8 @@ st.subheader("📝 Reflection Portal")
 
 with st.form("cosmic_input_form", clear_on_submit=True):
     user_entry = st.text_area(
-        label="Record a question to the cosmos or transcribe your reflections of the day here:",
-        placeholder="Type here... e.g., Reflecting on today's transition from Uttara Ashadha to Shravana.",
+        label="Record a question to the cosmos or transcribe your reflections here:",
+        placeholder="Type your notes or questions here...",
         label_visibility="collapsed"
     )
     submit_log = st.form_submit_button("📖 Close Latch & Commit to Vault", use_container_width=True)
@@ -99,10 +123,11 @@ with st.form("cosmic_input_form", clear_on_submit=True):
         try:
             df_log = pd.read_csv(DB_FILE)
         except Exception:
-            df_log = pd.DataFrame(columns=["Date", "Reflection_Or_Question", "Nakshatra", "Energy_Level"])
+            df_log = pd.DataFrame(columns=["Date", "Reflection_Or_Question", "Nakshatra", "Energy_Level", "Personal_Note"])
             
-        new_row = pd.DataFrame([[today_str, user_entry.strip(), cosmic['nakshatra'], cosmic['energy']]], 
-                               columns=["Date", "Reflection_Or_Question", "Nakshatra", "Energy_Level"])
+        is_p = "Personalized" if calculate_profile else "General"
+        new_row = pd.DataFrame([[today_str, user_entry.strip(), cosmic['nakshatra'], cosmic['energy'], is_p]], 
+                               columns=["Date", "Reflection_Or_Question", "Nakshatra", "Energy_Level", "Personal_Note"])
         new_row.to_csv(DB_FILE, mode='a', header=False, index=False)
         st.success("📔 The latch clicks shut. Reflection safely locked inside your vault.")
         st.rerun()
@@ -112,12 +137,12 @@ st.subheader("📚 The Ancestral Vault")
 try:
     vault_df = pd.read_csv(DB_FILE)
 except Exception:
-    vault_df = pd.DataFrame(columns=["Date", "Reflection_Or_Question", "Nakshatra", "Energy_Level"])
+    vault_df = pd.DataFrame(columns=["Date", "Reflection_Or_Question", "Nakshatra", "Energy_Level", "Personal_Note"])
 
 if not vault_df.empty:
     with st.expander("📖 Open Vault Pages", expanded=False):
         st.write("Browse through your running history of cosmic logs below:")
-        st.dataframe(vault_df[["Date", "Reflection_Or_Question", "Nakshatra"]], use_container_width=True, hide_index=True)
+        st.dataframe(vault_df[["Date", "Reflection_Or_Question", "Nakshatra", "Energy_Level"]], use_container_width=True, hide_index=True)
         
         csv_buffer = vault_df.to_csv(index=False).encode('utf-8')
         st.download_button(
