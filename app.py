@@ -206,19 +206,26 @@ with st.container(border=False):
         q_clean = chat_query.lower()
         st.markdown(f'<div class="chat-msg" style="background:rgba(255,255,255,0.05); color:#a393eb;"><strong>🧑 You:</strong> {chat_query}</div>', unsafe_allow_html=True)
         
-        # चुनी गई भाषा के हिसाब से एआई का प्रतिक्रिया लॉजिक
+        # चुनी गई भाषा के हिसाब से एडवांस्ड एआई प्रतिक्रिया लॉजिक
         if selected_lang == "Hindi (हिंदी)":
-            if "ऊर्जा" in q_clean or "कम" in q_clean or "अच्छा" in q_clean or "energy" in q_clean:
-                ai_ans = f"आज का ब्रह्मांडीय पैमाना {cosmic['rating']} का स्तर दिखा रहा है। इस संरेखण के आधार पर, आपके काम करने की क्षमता ऊपर बताए गए सुझावों के अनुसार चलेगी। आज 'क्या करें' वाले बिंदुओं पर ध्यान दें और तनाव से बचें।"
+            if "paise" in q_clean or "kharch" in q_clean or "money" in q_clean or "पैसे" in q_clean or "खर्च" in q_clean:
+                ai_ans = f"आज का ऊर्जा स्तर {cosmic['rating']} है और चंद्रमा श्रवण नक्षत्र में है। यह दिन नए निवेश या बड़े खर्चों के लिए जल्दबाजी करने का नहीं है। अपने बजट ट्रैकर (Spend Tracker) के नियमों का पालन करें और आज केवल आवश्यक खर्चों को ही प्राथमिकता दें!"
+            elif "study" in q_clean or "padhai" in q_clean or "पढ़ाई" in q_clean or "परीक्षा" in q_clean:
+                ai_ans = f"पढ़ाई के दृष्टिकोण से आज का दिन बहुत अनुकूल है! श्रवण नक्षत्र गहन शिक्षण (deep learning) और नए कोडिंग फॉर्मूले सीखने के लिए सर्वोत्तम है। आलस्य से बचें, आपका ध्यान आज बहुत मजबूत रहेगा।"
+            elif "ऊर्जा" in q_clean or "कम" in q_clean or "अच्छा" in q_clean or "energy" in q_clean:
+                ai_ans = f"आज का ब्रह्मांडीय पैमाना {cosmic['rating']} का स्तर दिखा रहा है। इस संरेखण के आधार पर, आपके काम करने की क्षमता बहुत मजबूत है। आज 'क्या करें' वाले बिंदुओं पर ध्यान दें और अनावश्यक तनाव से बचें।"
             elif "जन्म" in q_clean or "कुंडली" in q_clean or "तारीख" in q_clean:
                 ai_ans = f"आपकी जन्म कुंडली का विवरण सुरक्षित रूप से ब्राउज़र कैश में सेव है। वर्तमान गणना के अनुसार आपका {cosmic['star']} पथ सक्रिय है, जो आज के गोचर के साथ जुड़ा हुआ है।"
             else:
                 ai_ans = "ग्रहों की चाल आज सामान्य और सहायक बनी हुई है। अपने कार्यों को आज की प्राथमिकताओं के साथ जोड़ें, आलस से बचें और धीरे-धीरे आगे बढ़ें।"
         else:
-            if "energy" in q_clean or "low" in q_clean or "good" in q_clean:
-                ai_ans = f"Today's active scale indicates a rating of {cosmic['rating']}. Based on this alignment, lean directly into the prioritized guidelines and avoid structural fatigue loops."
-            elif "birth" in q_clean or "chart" in q_clean or "details" in q_clean:
-                ai_ans = f"Your planetary grid layout is processed safely. The current configuration tracks a {cosmic['star']} path across today's live transits."
+            # English Responses
+            if "money" in q_clean or "spend" in q_clean or "expense" in q_clean:
+                ai_ans = f"Today's energy is {cosmic['rating']}. It's a day for calculation rather than impulsive shopping. Stick to your Pocket Spend Tracker goals and avoid signing high-risk financial commitments today!"
+            elif "study" in q_clean or "exam" in q_clean or "learn" in q_clean:
+                ai_ans = "Shravana Nakshatra is highly active today, making it perfect for absorbing deep technical knowledge, writing application scripts, and focused self-study."
+            elif "energy" in q_clean or "low" in q_clean or "good" in q_clean:
+                ai_ans = f"Today's active scale indicates a rating of {cosmic['rating']}. Based on this alignment, lean directly into the prioritized guidelines."
             else:
                 ai_ans = "The cosmic vectors suggest standard energetic supportive currents. Align your actions to what is prioritized today and advance steadily."
             
