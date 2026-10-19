@@ -19,25 +19,21 @@ def get_ist_date():
 st.set_page_config(page_title="Cosmic Journal Pro", layout="centered")
 init_db()
 today_str = get_ist_date()
+
+# 100% वर्किंग मोबाइल फ्रेंडली डीप स्पेस नेबुला इफ़ेक्ट
 st.markdown('''
 <style>
-@keyframes nebulaDrift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
 .stApp {
-    background: linear-gradient(-45deg, #090214, #180536, #0c1033, #020005) !important;
-    background-size: 400% 400% !important;
-    animation: nebulaDrift 30s ease infinite !important;
+    background: radial-gradient(circle at 50% 50%, #1a0b2e 0%, #0c0517 50%, #030006 100%) !important;
+    background-attachment: fixed !important;
     color: #f0f0f5 !important;
 }
 div.cosmic-page, div.chat-panel {
-    background: rgba(13, 6, 28, 0.75) !important;
+    background: rgba(18, 9, 36, 0.75) !important;
     border: 1px solid rgba(163, 147, 235, 0.25) !important;
     padding: 22px !important;
     border-radius: 14px !important;
-    backdrop-filter: blur(25px) !important;
+    backdrop-filter: blur(20px) !important;
     margin-bottom: 15px !important;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
 }
@@ -58,7 +54,7 @@ div.cosmic-page p, div.cosmic-page strong, div.cosmic-page span {
 }
 .stTextArea div[data-baseweb="textarea"] {
     background-color: rgba(255, 255, 255, 0.05) !important;
-    border: 1px solid rgba(138, 122, 181, 0.20) !important;
+    border: 1px solid rgba(163, 147, 235, 0.20) !important;
 }
 textarea {
     color: #ffffff !important;
@@ -82,8 +78,8 @@ LANG_DICT = {
         "vault_open": "📖 Open Book Vault Ledger Pages", "btn_print": "🖨️ Print / Export Entire Ledger History"
     },
     "Hindi (हिंदी)": {
-        "title": "✨ संरेखण मैट्रिक्स एवं विस्तृत अवलोकन (Alignment Matrix & Overview)", "nakshatra": "🔮 सक्रिय नक्षत्र गोचर एवं प्रभाव:", "energy": "⚡ दैनिक ऊर्जा स्तर एवं मानसिक स्थिति:", 
-        "todo": "🟢 व्यापक मार्गदर्शन (आज किन चीज़ों को प्राथमिकता दें):", "avoid": "🔴 नकारात्मक प्रभाव सीमा (किन चीज़ों से पूरी तरह बचें):", "portal": "📝 आत्म-चिंतन校対 पोर्टल", 
+        "title": "✨ संरेखण मैट्रिक्स एवं विस्तृत अवलोकन", "nakshatra": "🔮 सक्रिय नक्षत्र गोचर एवं प्रभाव:", "energy": "⚡ दैनिक ऊर्जा स्तर एवं मानसिक स्थिति:", 
+        "todo": "🟢 व्यापक मार्गदर्शन (आज किन चीज़ों को प्राथमिकता दें):", "avoid": "🔴 नकारात्मक प्रभाव सीमा (किन चीज़ों से पूरी तरह बचें):", "portal": "📝 आत्म-चिंतन पोर्टल", 
         "vault": "📚 पुरालेख तिजोरी", "config_title": "✨ जन्म प्रोफ़ाइल सेट करें (सिर्फ़ एक बार)",
         "pob_place": "शहर, देश का नाम", "sync_btn": "कुंडली मैट्रिक्स को सिंक्रनाइज़ करें?", "btn_save": "📖 तिजोरी में सुरक्षित लॉग करें",
         "chat_title": "💬 आकाशीय एआई चैट असिस्टेंट", "chat_place": "आज के नक्षत्र या अपनी ऊर्जा के बारे में कुछ भी पूछें...",
@@ -93,9 +89,9 @@ LANG_DICT = {
         "title": "✨ الائنمنٹ میٹرکس", "nakshatra": "🔮 فعال نکشتر فوکس:", "energy": "⚡ آج کی توانائی کا پیمانہ:", 
         "todo": "🟢 کیا کرنا ہے:", "avoid": "🔴 کس چیز سے پرہیز کرنا ہے:", "portal": "📝 پورٹل کی عکاسی", 
         "vault": "📚 آرکائیول وولٹ", "config_title": "✨ برتھ پروفائل کنفیگر کریں",
-        "pob_place": "شہر، ملک کا نام", "sync_btn": "سستم میٹرکس کو سنکرونائز کریں؟", "btn_save": "📖 لیس بند کریں اور وولٹ میں محفوظ کریں",
-        "chat_title": "💬 فلکیاتی چیٹ اسسٹنٹ", "chat_place": "آج کے ٹرانزٹ کے بارے میں کچھ भी पूछें...",
-        "vault_open": "📖 وولٹ لیجر کے صفحات کھولیں", "btn_print": "🖨️ ہسٹری پرنٹ یا ایکسپورٹ کریں"
+        "pob_place": "شہر، ملک کا نام", "sync_btn": "سسٹم میٹرکس کو سنکرونائز کریں؟", "btn_save": "📖 لیس بند کریں اور وولٹ میں محفوظ کریں",
+        "chat_title": "💬 فلکیاتی چیٹ اسسٹنٹ", "chat_place": "آج کے ٹرانزٹ کے بارے में कुछ भी पूछें...",
+        "vault_open": "📖 وولٹ لیجر کے صفحات کھولیں", "btn_print": "🖨️ ہسٹری پرنٹ या एक्सपोर्ट करें"
     }
 }
 
@@ -177,6 +173,7 @@ def compute_cosmic_flow(has_chart, b_date, lang):
             }
 
 cosmic = compute_cosmic_flow(sync_chart, dob, selected_lang)
+
 st.markdown(f'''
 <div class="cosmic-page">
     <h3 style="color: #dcd6f7 !important; margin-top:0; margin-bottom:12px; font-size:16px;">{L['title']} ({today_str})</h3>
@@ -186,6 +183,40 @@ st.markdown(f'''
     <p style="font-size:14px; margin-bottom:14px; line-height:1.6; text-align: justify;"><strong>{L['todo']}</strong> <br>{cosmic['do']}</p>
     <p style="font-size:14px; margin-bottom:0; line-height:1.6; text-align: justify;"><strong>{L['avoid']}</strong> <br>{cosmic['avoid']}</p>
 </div>''', unsafe_allow_html=True)
+st.markdown(f"<p style='font-size:14px; margin-bottom:4px; color:#a393eb; font-weight:bold;'>{L['chat_title']}</p>", unsafe_allow_html=True)
+
+with st.container(border=False):
+    st.markdown('<div class="chat-panel">', unsafe_allow_html=True)
+    chat_query = st.text_input(L["chat_title"], placeholder=L["chat_place"], label_visibility="collapsed")
+    
+    if chat_query:
+        q_clean = chat_query.lower()
+        st.markdown(f'<div class="chat-msg" style="background:rgba(255,255,255,0.05); color:#a393eb;"><strong>🧑 You:</strong> {chat_query}</div>', unsafe_allow_html=True)
+        
+        if selected_lang == "Hindi (हिंदी)":
+            if "paise" in q_clean or "kharch" in q_clean or "money" in q_clean or "पैसे" in q_clean or "खर्च" in q_clean:
+                ai_ans = f"आज का ऊर्जा स्तर {cosmic['rating']} है और चंद्रमा श्रवण नक्षत्र में है। यह दिन नए निवेश या बड़े खर्चों के लिए जल्दबाजी करने का नहीं है। अपने बजट ट्रैकर (Spend Tracker) के नियमों का पालन करें और आज केवल आवश्यक खर्चों को ही प्राथमिकता दें!"
+            elif "study" in q_clean or "padhai" in q_clean or "पढ़ाई" in q_clean or "परीक्षा" in q_clean:
+                ai_ans = f"पढ़ाई के दृष्टिकोण से आज का दिन बहुत अनुकूल है! श्रवण नक्षत्र गहन शिक्षण (deep learning) और नए कोडिंग फॉर्मूले सीखने के लिए सर्वोत्तम है। आलस्य से बचें, आपका ध्यान आज बहुत मजबूत रहेगा।"
+            elif "ऊर्जा" in q_clean or "कम" in q_clean or "अच्छा" in q_clean or "energy" in q_clean:
+                ai_ans = f"आज का ब्रह्मांडीय पैमाना {cosmic['rating']} का स्तर दिखा रहा है। इस संरेखण के आधार पर, आपके काम करने की क्षमता बहुत मजबूत है। आज 'क्या करें' वाले बिंदुओं पर ध्यान दें और अनावश्यक तनाव से बचें।"
+            elif "जन्म" in q_clean or "कुंडली" in q_clean or "तारीख" in q_clean:
+                ai_ans = f"आपकी जन्म कुंडली का विवरण सुरक्षित रूप से ब्राउज़र कैश में सेव है। वर्तमान गणना के अनुसार आपका {cosmic['star']} पथ सक्रिय है, जो आज के गोचर के साथ जुड़ा हुआ है।"
+            else:
+                ai_ans = "ग्रहों की चाल आज सामान्य और सहायक बनी हुई है। अपने कार्यों को आज की प्राथमिकताओं के साथ जोड़ें, आलस से बचें और धीरे-धीरे आगे बढ़ें।"
+        else:
+            if "money" in q_clean or "spend" in q_clean or "expense" in q_clean:
+                ai_ans = f"Today's energy is {cosmic['rating']}. It's a day for calculation rather than impulsive shopping. Stick to your Pocket Spend Tracker goals and avoid signing high-risk financial commitments today!"
+            elif "study" in q_clean or "exam" in q_clean or "learn" in q_clean:
+                ai_ans = "Shravana Nakshatra is highly active today, making it perfect for absorbing deep technical knowledge, writing application scripts, and focused self-study."
+            elif "energy" in q_clean or "low" in q_clean or "good" in q_clean:
+                ai_ans = f"Today's active scale indicates a rating of {cosmic['rating']}. Based on this alignment, lean directly into the prioritized guidelines."
+            else:
+                ai_ans = "The cosmic vectors suggest standard energetic supportive currents. Align your actions to what is prioritized today and advance steadily."
+            
+        st.markdown(f'<div class="chat-msg" style="background:rgba(163,147,235,0.1); color:#ffffff;"><strong>🔮 Coll AI:</strong> {ai_ans}</div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+
 st.markdown(f"<p style='font-size:13px; margin-bottom:4px; color:#a393eb; font-weight:bold;'>{L['portal']}</p>", unsafe_allow_html=True)
 
 with st.form("cosmic_input_form", clear_on_submit=True):
