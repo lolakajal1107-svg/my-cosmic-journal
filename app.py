@@ -71,8 +71,13 @@ with st.expander("✨ Open Cosmic Blueprint (Enter Birth Details)", expanded=Fal
     st.markdown("<small style='color:#8a7ab5;'>Your details are processed locally and never stored publicly.</small>", unsafe_allow_html=True)
     col_b1, col_b2 = st.columns(2)
     with col_b1:
-        dob = st.date_input("Date of Birth:", value=datetime(2000, 1, 1).date())
-        tob = st.time_input("Time of Birth:", value=datetime(12, 0).time())
+        # Fixed: Using a safe calendar fallback date
+        default_date = datetime(2000, 1, 1).date()
+        dob = st.date_input("Date of Birth:", value=default_date)
+        
+        # Fixed: Using a clean, isolated hour/minute parameters block to avoid TypeErrors
+        import datetime as dt_lib
+        tob = st.time_input("Time of Birth:", value=dt_lib.time(12, 0))
     with col_b2:
         pob = st.text_input("Place of Birth:", placeholder="e.g. New Delhi, India")
         calculate_profile = st.checkbox("Synchronize Personal Chart?", value=False)
